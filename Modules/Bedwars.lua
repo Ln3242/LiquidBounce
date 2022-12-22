@@ -738,7 +738,7 @@ UtilitySection:NewToggle("NoFall", "NoFall", function(state)
     end
 end)
 
-UtilitySection:NewToggle("AutoBuff", "most for skywars lol", function(state)
+--[[UtilitySection:NewToggle("AutoBuff", "most for skywars lol", function(state)
     if state then
         _G.AutoBuff = true
         while _G.AutoBuff do
@@ -764,7 +764,7 @@ UtilitySection:NewToggle("AutoBuff", "most for skywars lol", function(state)
     else
         print("hi")
     end
-end)
+end)--]]
 
 UtilitySection:NewSlider("Gravity", "Gravity", 192.6, 1, function(grav) -- 500 (MaxValue) | 0 (MinValue)
     game.Workspace.Gravity = grav
