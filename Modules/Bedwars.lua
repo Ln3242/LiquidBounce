@@ -121,43 +121,6 @@ local function getSword()
 	return returning
 end
 
-
-local function GetAllNearestHumanoidToPosition(distance, amount)
-	local returnedplayer = {}
-	local currentamount = 0
-	if entity.isAlive then -- alive check
-		for i, v in pairs(game.Players:GetChildren()) do -- loop through players
-			if isPlayerTargetable((v), true, true, v.Character ~= nil) and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Head") and currentamount < amount then -- checks
-				local mag = (lplr.Character.HumanoidRootPart.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude
-				if mag <= distance then -- mag check
-					table.insert(returnedplayer, v)
-					currentamount = currentamount + 1
-				end
-			end
-		end
-		for i2,v2 in pairs(game:GetService("CollectionService"):GetTagged("Monster")) do -- monsters
-			if v2:FindFirstChild("HumanoidRootPart") and currentamount < amount and v2.Name ~= "Duck" then -- no duck
-				local mag = 
-(lplr.Character.HumanoidRootPart.Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude
-				if mag <= distance then -- mag check
-					table.insert(returnedplayer, v)
-					currentamount = currentamount + 1
-				end
-			end
-		end
-		for i2,v2 in pairs(game:GetService("CollectionService"):GetTagged("Monster")) do -- monsters
-			if v2:FindFirstChild("HumanoidRootPart") and currentamount < amount and v2.Name ~= "Duck" then -- no duck
-				local mag = (lplr.Character.HumanoidRootPart.Position - v2.HumanoidRootPart.Position).magnitude
-				if mag <= distance then -- magcheck
-					table.insert(returnedplayer, {Name = (v2 and v2.Name or "Monster"), UserId = 1443379645, Character = v2}) -- monsters are npcs so I have to create a fake player for target info
-					currentamount = currentamount + 1
-				end
-			end
-		end
-	end
-	return returnedplayer -- table of attackable entities
-end
-
 local HitRemote = Client:Get(bedwars["SwordRemote"])
 local Enabled = true
 
@@ -304,28 +267,6 @@ MovementSection:NewToggle("AcSpeed1", "CFrame lol", function(state)--springs
 		_G.Speed1 = false
     end
 end)
-local speedval = {["Value"] = 1}
-MovementSection:NewToggle("Speed", "Gives Speed", function(state)
-        if state then
-            BindToStepped("CFrameWalkSpeed", 1, function(time, delta)
-                if entity.isAlive then
-                    local newpos = (lplr.Character.Humanoid.MoveDirection  * (speedval["Value"] - lplr.Character.Humanoid.WalkSpeed)) * delta
-    
-                    local raycastparameters = RaycastParams.new()
-                    raycastparameters.FilterDescendantsInstances = {lplr.Character}
-                    local ray = workspace:Raycast(lplr.Character.HumanoidRootPart.Position, newpos, raycastparameters)
-                    if ray then newpos = (ray.Position - lplr.Character.HumanoidRootPart.Position) end
-                    lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame + newpos
-                end
-            end)
-        else
-            UnbindFromStepped("CFrameWalkSpeed")
-        end
-    end)
-    
-    MovementSection:NewSlider("Speed 1-23", "Adjust CFrame speed", 23, 1, function(s)
-        speedval["Value"] = s
-    end)
 
 MovementSection:NewKeybind("Flight", "Flight", Enum.KeyCode.R, function()--springs even though its gravity lmao
 	game.Workspace.Gravity = 0
