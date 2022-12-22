@@ -242,7 +242,6 @@ CombatSection:NewToggle("Velocity", "Velocity", function(state)--springs
 end)
 
 --Movement
-
 MovementSection:NewToggle("AcSpeed1", "CFrame lol", function(state)--springs
     if state then
         local Speed = 0.22
@@ -267,7 +266,7 @@ MovementSection:NewToggle("AcSpeed1", "CFrame lol", function(state)--springs
 		_G.Speed1 = false
     end
 end)
-
+local speedval = {["Value"] = 1}
 MovementSection:NewToggle("Speed", "Gives Speed", function(state)
         if state then
             BindToStepped("CFrameWalkSpeed", 1, function(time, delta)
