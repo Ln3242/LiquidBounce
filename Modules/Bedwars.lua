@@ -268,22 +268,27 @@ MovementSection:NewToggle("AcSpeed1", "CFrame lol", function(state)--springs
     end
 end)
 
-MovementSection:NewToggle("AcSpeed2", "HeatSeeker lol", function(state)--springs
-    if state then
-        _G.HeatSeeker = true
-
-        while _G.HeatSeeker do
-            lplr.Character.Humanoid.WalkSpeed = 120
-            wait(0.05)
-            lplr.Character.Humanoid.WalkSpeed = 0
-            wait()
-            lplr.Character.Humanoid.WalkSpeed = 16
-            wait(0.8)
+MovementSection:NewToggle("Speed", "Gives Speed", function(state)
+        if state then
+            BindToStepped("CFrameWalkSpeed", 1, function(time, delta)
+                if entity.isAlive then
+                    local newpos = (lplr.Character.Humanoid.MoveDirection  * (speedval["Value"] - lplr.Character.Humanoid.WalkSpeed)) * delta
+    
+                    local raycastparameters = RaycastParams.new()
+                    raycastparameters.FilterDescendantsInstances = {lplr.Character}
+                    local ray = workspace:Raycast(lplr.Character.HumanoidRootPart.Position, newpos, raycastparameters)
+                    if ray then newpos = (ray.Position - lplr.Character.HumanoidRootPart.Position) end
+                    lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame + newpos
+                end
+            end)
+        else
+            UnbindFromStepped("CFrameWalkSpeed")
         end
-    else
-        _G.HeatSeeker = false
-    end
-end)
+    end)
+    
+    MovementSection:NewSlider("Speed 1-23", "Adjust CFrame speed", 23, 1, function(s)
+        speedval["Value"] = s
+    end)
 
 MovementSection:NewKeybind("Flight", "Flight", Enum.KeyCode.R, function()--springs even though its gravity lmao
 	game.Workspace.Gravity = 0
