@@ -770,38 +770,6 @@ UtilitySection:NewSlider("Gravity", "Gravity", 192.6, 1, function(grav) -- 500 (
     game.Workspace.Gravity = grav
 end)
 
-runcode(function()
-	local wall = nil
-	local spiderspeed = {["Value"] = 0}
-	local Spider = MovementSection:NewSection("Spider")
-	Spider:NewToggle("Spider", "Allows you to climb up a wall", function(state)
-		if state then
-			BindToStepped("Spider", 1, function()
-				local raycastparameters = RaycastParams.new()
-				raycastparameters.FilterDescendantsInstances = {lplr.Character}
-				local ray = workspace:Raycast(lplr.Character.Humanoid.LeftLeg.Position, lplr.Character.HumanoidRootPart.CFrame.LookVector * 1.3, raycastparameters)
-
-				wall = ray and ray.Instance or nil
-				if wall then
-					lplr.Character.HumanoidRootPart.Velocity = Vector3.new(lplr.Character.HumanoidRootPart.Velocity.X or 0, spiderspeed["Value"], lplr.Character.HumanoidRootPart.Velocity.Z or 0)
-
-					if lplr.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Climbing then
-						lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Freefall)
-					end
-				end
-			end)
-		else
-			UnbindFromStepped("Spider")
-		end
-	end)
-	Spider:NewSlider("Speed", "Adjust spider speed", 50, 0, function(val) -- 500 (MaxValue) | 0 (MinValue)
-		spiderspeed["Value"] = val
-	end)
-	end)
-
-
-
-
 --Scripts - This is where if you want to add something extra, put it here
 
 local tableofrandom = {"8C403AE6-9477-4CA1-832C-B5975D0F0C49","EB8A0EF1-FF95-48C5-BDB0-E6C218230C63","81B43368-D44E-4662-B4AB-B3564A78A155", "6823994F-EDB0-4494-AD45-D248EC4CD070", "83E8CB3C-33B5-4ECB-A4A2-86121EE0E17C"}
