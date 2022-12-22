@@ -120,7 +120,6 @@ local function getSword()
 	end
 	return returning
 end
-
 local HitRemote = Client:Get(bedwars["SwordRemote"])
 local Enabled = true
 
@@ -243,6 +242,7 @@ CombatSection:NewToggle("Velocity", "Velocity", function(state)--springs
 end)
 
 --Movement
+
 MovementSection:NewToggle("AcSpeed1", "CFrame lol", function(state)--springs
     if state then
         local Speed = 0.22
@@ -265,6 +265,23 @@ MovementSection:NewToggle("AcSpeed1", "CFrame lol", function(state)--springs
 		end
     else
 		_G.Speed1 = false
+    end
+end)
+
+MovementSection:NewToggle("AcSpeed2", "HeatSeeker lol", function(state)--springs
+    if state then
+        _G.HeatSeeker = true
+
+        while _G.HeatSeeker do
+            lplr.Character.Humanoid.WalkSpeed = 120
+            wait(0.05)
+            lplr.Character.Humanoid.WalkSpeed = 0
+            wait()
+            lplr.Character.Humanoid.WalkSpeed = 16
+            wait(0.8)
+        end
+    else
+        _G.HeatSeeker = false
     end
 end)
 
@@ -328,23 +345,6 @@ VisualsSection:NewButton("Chams", "Chams", function()--springs
         end)
     end)
 end)
-
-MovementSection:NewToggle("Sprint", "Keep sprinting", function(state)--springs
-    if state then
-        _G.sprint = true
-        while _G.sprint = true then
-            require(game:GetService("Players").LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController:startSprinting()
-            wait(0.369)
-        end
-
-    else
-        _G.sprint = false
-        require(game:GetService("Players").LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController:stopSprinting()
-    end
-end)
-
-
-
 
 VisualsSection:NewButton("Health | LiqBounce", "Health", function()--springs
     local ScreenGui = Instance.new("ScreenGui")
@@ -738,7 +738,7 @@ UtilitySection:NewToggle("NoFall", "NoFall", function(state)
     end
 end)
 
---[[UtilitySection:NewToggle("AutoBuff", "most for skywars lol", function(state)
+UtilitySection:NewToggle("AutoBuff", "most for skywars lol", function(state)
     if state then
         _G.AutoBuff = true
         while _G.AutoBuff do
@@ -764,11 +764,13 @@ end)
     else
         print("hi")
     end
-end)--]]
+end)
 
 UtilitySection:NewSlider("Gravity", "Gravity", 192.6, 1, function(grav) -- 500 (MaxValue) | 0 (MinValue)
     game.Workspace.Gravity = grav
 end)
+
+
 
 --Scripts - This is where if you want to add something extra, put it here
 
@@ -794,3 +796,4 @@ function whitelisted()
 end
 
 notify("Has succesfully loaded!", "LiquidBounce", 3)
+
