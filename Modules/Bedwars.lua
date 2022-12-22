@@ -770,6 +770,20 @@ UtilitySection:NewSlider("Gravity", "Gravity", 192.6, 1, function(grav) -- 500 (
     game.Workspace.Gravity = grav
 end)
 
+MovementSection:NewToggle("Sprint", "Keep sprinting", function(state)--springs
+    if state then
+        _G.sprint = true
+        while _G.sprint = true then
+            require(game:GetService("Players").LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController:startSprinting()
+            wait(0.369)
+        end
+
+    else
+        _G.sprint = false
+        require(game:GetService("Players").LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController:stopSprinting()
+    end
+end)
+
 
 
 --Scripts - This is where if you want to add something extra, put it here
