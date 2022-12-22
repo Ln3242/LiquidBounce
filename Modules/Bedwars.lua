@@ -43,6 +43,7 @@ local bedwars = {
 	["AppController"] = require(repstorage["rbxts_include"]["node_modules"]["@easy-games"]["game-core"].out.client.controllers["app-controller"]).AppController,
 	["SwordRemote"] = getremote(debug.getconstants((KnitClient.Controllers.SwordController).attackEntity)),
 	["JuggernautAttackRemote"] = getremotev2(debug.getconstants(getmetatable(KnitClient.Controllers.SwordController)["attackEntity"])),
+	["ViewmodelController"] = KnitClient.Controllers.ViewmodelController,
 }
 local canReturn = false
 function getnearestplayer(maxdist)
