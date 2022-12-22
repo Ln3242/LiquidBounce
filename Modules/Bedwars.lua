@@ -271,7 +271,7 @@ end)
 runcode(function()
 	local wall = nil
 	local spiderspeed = {["Value"] = 0}
-	local Spider = Blatant:NewSection("Spider")
+	local Spider = MovementSection:NewSection("Spider")
 	Spider:NewToggle("Spider", "Allows you to climb up a wall", function(state)
 		if state then
 			BindToStepped("Spider", 1, function()
