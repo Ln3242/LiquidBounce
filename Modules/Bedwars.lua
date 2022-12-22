@@ -303,6 +303,31 @@ MovementSection:NewKeybind("Longjump", "Longjump", Enum.KeyCode.J, function()--s
     lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
 end)
 
+MovementSection:NewToggle("fly", "HypixelFly", function(v)
+    longjumpval = v
+            if longjumpval then
+                workspace.Gravity = 0
+                spawn(function()
+                    repeat
+                        if (not longjumpval) then return end
+                        lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Freefall)
+                        wait(0.1)
+                        lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Running)
+                        wait(0.1)
+                        lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Climbing)
+                        wait(0.1)
+                        lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
+                        wait(0.1)
+                        lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+                        wait(0.1)
+                    until (not longjumpval)
+                end)
+        else
+            workspace.Gravity = 196.19999694824
+            return
+        end
+    end)
+
 
 MovementSection:NewKeybind("Highjump", "Highjump", Enum.KeyCode.H, function()--springs
 	local Velocity = Instance.new("BodyVelocity",game.Players.LocalPlayer.Character.HumanoidRootPart)
