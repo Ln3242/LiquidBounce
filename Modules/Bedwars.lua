@@ -329,6 +329,23 @@ VisualsSection:NewButton("Chams", "Chams", function()--springs
     end)
 end)
 
+MovementSection:NewToggle("Sprint", "Keep sprinting", function(state)--springs
+    if state then
+        _G.sprint = true
+        while _G.sprint = true then
+            require(game:GetService("Players").LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController:startSprinting()
+            wait(0.369)
+        end
+
+    else
+        _G.sprint = false
+        require(game:GetService("Players").LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController:stopSprinting()
+    end
+end)
+
+
+
+
 VisualsSection:NewButton("Health | LiqBounce", "Health", function()--springs
     local ScreenGui = Instance.new("ScreenGui")
     local TextLabel = Instance.new("TextLabel")
