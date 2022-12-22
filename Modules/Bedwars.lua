@@ -43,7 +43,6 @@ local bedwars = {
 	["AppController"] = require(repstorage["rbxts_include"]["node_modules"]["@easy-games"]["game-core"].out.client.controllers["app-controller"]).AppController,
 	["SwordRemote"] = getremote(debug.getconstants((KnitClient.Controllers.SwordController).attackEntity)),
 	["JuggernautAttackRemote"] = getremotev2(debug.getconstants(getmetatable(KnitClient.Controllers.SwordController)["attackEntity"])),
-	["ViewmodelController"] = KnitClient.Controllers.ViewmodelController,
 }
 local canReturn = false
 function getnearestplayer(maxdist)
@@ -766,32 +765,6 @@ UtilitySection:NewToggle("AutoBuff", "most for skywars lol", function(state)
         print("hi")
     end
 end)
-
-UtilitySection:NewToggle("AutoBuff", "most for skywars lol", function(Callback)
-   Enabled = Callback
-            if Enabled then
-                Connection = cam.Viewmodel.ChildAdded:Connect(function(v)
-                    if v:FindFirstChild("Handle") then
-                        pcall(function()
-                            v:FindFirstChild("Handle").Size = v:FindFirstChild("Handle").Size / 1.5
-                            v:FindFirstChild("Handle").Material = Enum.Material.Neon
-                            v:FindFirstChild("Handle").TextureID = ""
-                            v:FindFirstChild("Handle").Color = Color3.fromRGB(255,65,65)
-                        end)
-                        local vname = string.lower(v.Name)
-                        if vname:find("sword") or vname:find("blade") then
-                            v:FindFirstChild("Handle").MeshId = "rbxassetid://11216117592"
-                        elseif vname:find("snowball") then
-                            v:FindFirstChild("Handle").MeshId = "rbxassetid://11216343798"
-                        end
-                    end
-                end)
-            else
-                Connection:Disconnect()
-            end
-        end
-end)
-
 
 UtilitySection:NewSlider("Gravity", "Gravity", 192.6, 1, function(grav) -- 500 (MaxValue) | 0 (MinValue)
     game.Workspace.Gravity = grav
