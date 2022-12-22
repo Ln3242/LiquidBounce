@@ -6,5 +6,5 @@ game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
     end
 end)
 if game.PlaceId == 6872274481 or game.PlaceId == 8560631822 or game.PlaceId == 8444591321 then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Ln3242/LiquidBounce/main/kavobedwars.lua", true))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Ln3242/Feather-Client/main/Modules/Bedwars.lua"))()
 end
